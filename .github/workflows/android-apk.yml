@@ -1,0 +1,52 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      search_api_url:
+        description: HTTPS Cloudflare tunnel URL forwarding to backend_user.py on port 8000
+        required: true
+        type: string
+        default: https://includes-strain-pipes-apparent.trycloudflare.com
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze app and run tests
+        run: |
+          flutter analyze lib test
+          flutter test
+
+      - name: Build installable APK
+        env:
+          SEARCH_API_URL: ${{ inputs.search_api_url }}
+        run: flutter build apk --release --dart-define="SEARCH_API_URL=$SEARCH_API_URL"
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: memory-market-android-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
