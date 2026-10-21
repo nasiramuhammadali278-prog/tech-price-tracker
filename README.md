@@ -16,7 +16,7 @@ computer.
    and the bundled SDK.
 2. Start your Cloudflare tunnel forwarding to the search service on port 8000.
    Keep the tunnel running while you use the app. The default workflow input
-   is `https://includes-strain-pipes-apparent.trycloudflare.com`; replace it
+   is `https://republic-superior-members-converted.trycloudflare.com`; replace it
    when starting a build if your Quick Tunnel URL has changed.
 3. In the GitHub repository, open **Actions**, select **Build Android APK**,
    choose **Run workflow**, and run it.

@@ -7,7 +7,7 @@ on:
         description: HTTPS Cloudflare tunnel URL forwarding to backend_user.py on port 8000
         required: true
         type: string
-        default: https://includes-strain-pipes-apparent.trycloudflare.com
+        default: https://republic-superior-members-converted.trycloudflare.com
 
 permissions:
   contents: read
