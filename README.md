@@ -14,10 +14,12 @@ computer.
    `mobile_app` folder. Do not upload the bundled `flutter/`, `build/`,
    `.dart_tool/`, or `.idea/` folders; `.gitignore` excludes generated files
    and the bundled SDK.
-2. Start your Cloudflare tunnel forwarding to the search service on port 8000.
-   Keep the tunnel running while you use the app. The default workflow input
-   is `https://republic-superior-members-converted.trycloudflare.com`; replace it
-   when starting a build if your Quick Tunnel URL has changed.
+2. For same-Wi-Fi testing, start the search service on your computer on port
+   8000, and use your computer's current private IPv4 address in the workflow
+   input, for example `http://192.168.1.25:8000`. Keep the computer on and the
+   phone connected to the same Wi-Fi. The IP can change if your router assigns
+   a new one; check `ipconfig` on Windows and update the workflow input.
+   Alternatively, use a stable public HTTPS backend URL.
 3. In the GitHub repository, open **Actions**, select **Build Android APK**,
    choose **Run workflow**, and run it.
 4. Open the completed workflow run, download the `memory-market-android-apk`
@@ -25,11 +27,13 @@ computer.
    Open the APK and allow your browser or file manager to install unknown
    apps if Android asks.
 
-Because the repository is public, its source code and APK artifact are public.
-The APK uses the temporary Cloudflare Quick Tunnel address provided at build
-time; it will stop connecting if the tunnel stops or its address changes.
-Only the search service is configured here. The separate featured-products
-service on port 9000 is not included in this setup.
+The repository is public, so its source code and APK artifact are public. A
+private LAN address works only while the phone and computer are on the same
+network; do not configure router port forwarding to expose this unauthenticated
+scraping endpoint to the internet. Android cleartext traffic is enabled for
+LAN testing; use HTTPS for an internet-facing production backend. Only the
+search service is configured here. The separate featured-products service on
+port 9000 is not included in this setup.
 
 ## Run locally
 

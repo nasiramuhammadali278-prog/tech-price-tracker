@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       search_api_url:
-        description: HTTPS Cloudflare tunnel URL forwarding to backend_user.py on port 8000
+        description: "Backend URL reachable from your phone. Use http://<PC-LAN-IP>:8000 for same Wi-Fi."
         required: true
         type: string
-        default: https://republic-superior-members-converted.trycloudflare.com
+        default: http://192.168.100.21:8000
 
 permissions:
   contents: read
